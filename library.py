@@ -14,13 +14,12 @@ dictkeys = ['hellos', 'wishes', 'greet', 'answer']
 class PhraseLookup:
     def __init__(self, text):
         self.text = text
-        pass
 
     def greetings(self):
         for phrase in greetings:
             search = re.search(phrase, self.text)
             if search:
-                return "greetings"
+                return "greet"
             else:
                 continue
 
@@ -44,6 +43,6 @@ class PhraseLookup:
         for phrase in basic_answers:
             search = re.search(phrase, self.text)
             if search:
-                return "basic_answers"
+                return "answer"
             else:
                 continue
