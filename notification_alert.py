@@ -12,29 +12,29 @@ def linetag():
     newlogfile_users = open(lib.logfile_users, "a")
     newlogfile_chatnum = open(lib.logfile_chatnum, 'a')
     firstline_eval_u = open(f"{lib.logfile_users}", 'r').readlines()
-    firstline_eval_c = open(f"{lib.logfile_users}", 'r').readlines()
+    firstline_eval_c = open(f"{lib.logfile_chatnum}", 'r').readlines()
     if len(firstline_eval_u) == 0:
         print('hey from 0lines')
         newlogfile_users.write(f"--/{lib.tdy}")
     else:
-        del firstline_eval_u
+        # del firstline_eval_u
         newlogfile_users.write(f"\n\n--/{lib.tdy}")
 
     if len(firstline_eval_c) == 0:
         print('hey from 0lines')
         newlogfile_chatnum.write(f"--/{lib.tdy}")
     else:
-        del firstline_eval_u
+        # del firstline_eval_u
         newlogfile_chatnum.write(f"\n\n--/{lib.tdy}")
 
 
 def logger(username="", chatnum="", u=False, c=False):
-    fu = open(f"{lib.logfile_}", 'a')
+    fu = open(f"{lib.logfile_users}", 'a')
     fc = open(f"{lib.logfile_chatnum}", 'a')
     if u is True:
-        fu.write(f"\n{lib.now} - //@{username} -- sent a new msg")
+        fu.write(f"\n{lib.now} - //@{username} sent a new msg")
     elif c is True:
-        fc.write(f"\n{lib.now} - @{chatnum} -- new messages")
+        fc.write(f"\n{lib.now} - ({chatnum}) new messages")
     fu.close()
     fc.close()
 
@@ -80,7 +80,7 @@ def copy():
 def logusernames(numofchats):
     for num in range(numofchats):
         pyperclip.copy('')
-        y = 345+(num*70)
+        y = 345 + (num * 70)
         pt.moveTo(265, y, duration=0.5)
         pt.leftClick(duration=.3)
         pt.moveTo(948, 207, duration=0.3)
@@ -93,7 +93,7 @@ def logusernames(numofchats):
         logger(username=searchusername, u=True)
         if num == 0:
             # chatnumlogger.info(f"({numofchats})" + " new messages")
-            logger(chatnum=searchusername, u=True)
+            logger(chatnum=numofchats, c=True)
         elif num > 0:
             pass
         pt.moveTo(824, 158, duration=0.3)

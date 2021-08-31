@@ -2,65 +2,98 @@ import re
 import datetime
 now = datetime.datetime.today().strftime("%H:%M:%S")
 tdy = datetime.datetime.today().strftime("%d-%b-%y %H:%M")
+date = datetime.datetime.today().strftime("%d-%b-%y")
 greetings = ['how are you', 'how r you', 'how r u', 'hru',
-             "how's life", "how you doing", 'how r u doing', "how's it going"]
-hellos = ['hey', 'hi', 'hii', 'hello']
+             r"how\Ws life", "how you doing", 'how r u doing',
+             r"how\Ws it going", r"what\Ws up\b"]
+
+hellos = [r'\bhey\b', r'\bhi\b', r'\bhii\b', 'hello']
+
 wishes = ['goodluck', 'all the best', 'best of luck',
           'hope you have a good day', 'hope u have a good day',
-          'happy birthday']
-basic_answers = ['good', "i'm good", "great", 'not good', 'not so good',
-                 'not bad', "i'm fine", "i'm alright"]
-dictkeys = ['hellos', 'wishes', 'greet', 'answer']
+          'happy birthday', 'happy bday']
 
-logfile_users = 'logs/userlog.txt'
-logfile_chatnum = 'logs/chatlog.txt'
-logfile_texts = 'logs/textslog.txt'
+basic_answers = ['good', r"i\Wm good", "great", 'not good',
+                 'not so good',
+                 'not bad', r"i\Wm fine", r"i\Wm alright"]
+
+kill_text_ = r"\bstop\b"
+
+dictkeys = ['say_hello', 'wish_back', 'greet', 'answer']
+replies = {'say_hello': ['hey!!', 'hii!', 'hello', 'sup'],
+           'wish_back': ['thank you sm!', 'thanks', 'thank you', 'thank you!'],
+           'greet': ["i'm good thanks for asking", "i'm good", 'good,thank u'],
+           'answer': ""}
+
+
+github_link = '<https://github.com/rp-bot/ig-chat-assistant-1>'
+logfile_users = f'logs/userlog_{date}.txt'
+logfile_chatnum = f'logs/chatlog_{date}.txt'
+logfile_texts = f'logs/textslog_{date}.txt'
 
 
 class PhraseLookup:
     def __init__(self, text):
         self.text = text
-        self.searchresult = ''  # return this
+        self.greetings_l = greetings
+        self.hellos_l = hellos
+        self.wishes_l = wishes
+        self.basic_answers_l = basic_answers
+        self.kill_text_ = kill_text_
+        self.eval_result = ''
         self.greetings()
         self.hellos()
         self.wishes()
         self.basic_answers()
+        self.kill_text()
+        if self.eval_result == '':
+            self.eval_result = 'inconclusive'
 
     def greetings(self):
-        for phrase in greetings:
+        for phrase in self.greetings_l:
             search = re.search(phrase, self.text)
             if search:
-                return "greet"
-            else:
-                continue
-
-    def hellos(self):
-        for phrase in hellos:
-            search = re.search(phrase, self.text)
-            if search:
-                return "hellos"
-            else:
-                continue
-
-    def wishes(self):
-        for phrase in wishes:
-            search = re.search(phrase, self.text)
-            if search:
-                return "wishes"
-            else:
-                continue
-
-    def basic_answers(self):
-        for phrase in basic_answers:
-            search = re.search(phrase, self.text)
-            if search:
-                self.searchresult = "answer"
+                self.eval_result = "greet"
                 break
             else:
                 continue
 
+    def hellos(self):
+        for phrase in self.hellos_l:
+            search = re.search(phrase, self.text)
+            if search:
+                self.eval_result = "say_hello"
+                break
+            else:
+                continue
+
+    def wishes(self):
+        for phrase in self.wishes_l:
+            search = re.search(phrase, self.text)
+            if search:
+                self.eval_result = "wish_back"
+                break
+            else:
+                continue
+
+    def basic_answers(self):
+        for phrase in self.basic_answers_l:
+            search = re.search(phrase, self.text)
+            if search:
+                self.eval_result = "answer"
+                break
+            else:
+                continue
+
+    def kill_text(self):
+        search = re.search(self.kill_text_, self.text)
+        if search:
+            self.eval_result = "kill"
+
     def __str__(self):
-        return self.searchresult
+        return self.eval_result
 
 
-print(PhraseLookup("happy bday"))
+if __name__ == '__main__':
+    x = PhraseLookup("good🔥🔥")
+    print(x.eval_result)
