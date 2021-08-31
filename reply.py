@@ -1,44 +1,39 @@
+import os
 import pyperclip
 import time
 import re
 import pyautogui as pt
 from pynput.keyboard import Key, Controller as keyboard_con
-import datetime
-from notification_alert import logfile_chatnum, logfile_users
-from library import PhraseLookup
-import os
-logfile_texts = 'logs/textslog.txt'
-now = datetime.datetime.today().strftime("%H:%M:%S")
-tdy = datetime.datetime.today().strftime("%d-%b-%y %H:%M")
+import library as lib
 
 
 def logger(user='', message='', bot=False, newuser=False):
-    f = open(f"{logfile_texts}", 'a')
+    f = open(f"{lib.logfile_texts}", 'a')
     if newuser is True:
         print('hey')
-        firstline_eval = open(f"{logfile_texts}", 'r').readlines()
+        firstline_eval = open(f"{lib.logfile_texts}", 'r').readlines()
         if len(firstline_eval) == 0:
             print('hey from 0lines')
-            f.write(f"--/{tdy}")
+            f.write(f"--/{lib.tdy}")
         else:
             del firstline_eval
-            f.write(f"\n\n--/{tdy}")
+            f.write(f"\n\n--/{lib.tdy}")
     elif bot is True:
-        f.write(f"\n{now} - //@{user} -- {message}")
+        f.write(f"\n{lib.now} - //@{user} -- {message}")
     elif bot is False and newuser is False:
-        f.write(f"\n{now} - @{user} -- {message}")
+        f.write(f"\n{lib.now} - @{user} -- {message}")
     f.close()
 
 
 def userlistgen():
     global userlist
-    chatnumlog = open(logfile_chatnum, 'r').readlines()
+    chatnumlog = open(lib.logfile_chatnum, 'r').readlines()
     chatnumlog = re.search(r'(?<=\()\w+(?=\))', chatnumlog[-1]).group()
 
     userlist = []
     print(chatnumlog)
     for users in range(int(chatnumlog)):
-        user = open(logfile_users, 'r').readlines()
+        user = open(lib.logfile_users, 'r').readlines()
         user = re.search(r"(?<=@).*(?= sent)", user[-(users+1)]).group()
         userlist.append(user)
 
@@ -85,7 +80,7 @@ def paste():
 
 def evalndel(numberoftexts):
     global totaltext
-    logslist = open(logfile_texts, 'r').readlines()
+    logslist = open(lib.logfile_texts, 'r').readlines()
     latest = ''
     prev = ''
     prev_user = ''
@@ -153,12 +148,10 @@ def reply():
     pt.leftClick(duration=0.1)
 
 
-if __name__ == '__main__':
-    time.sleep(2)
-    tru = True
-    while tru:
-
-        global userlist, userindex
+def bot_init():
+    bot_on = True
+    while bot_on:
+        global userlist, userindex, totaltext
         userlistgen()
         userlist = userlist[::-1]
         print(userlist)
@@ -174,3 +167,7 @@ if __name__ == '__main__':
                 pt.leftClick(duration=0.2)
         print("breakin loop")  # contin
         break
+
+
+if __name__ == '__main__':
+    time.sleep(2)
