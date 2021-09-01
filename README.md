@@ -21,6 +21,15 @@ A bot that can reply to basic one line texts.
 
 Instagram DM Bot1 needs python 3.8 to run and the following modules.
 
+> **note**: you will need to make some changes to the script so that the cursor is aligned with the elements.
+
+### Some examples of the code
+
+
+```pt.moveTo(657, 1397, duration=.2)```
+
+```howmanychats_loc = (1118, 290)```
+
 tested in spyder 5.0.5
 
 ## Modules
