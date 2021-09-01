@@ -17,7 +17,8 @@ A bot that can reply to basic one line texts.
 
 ## Installation
 
-Instagram DM Bot1 needs python 3.8 to run and the following modules. 
+Instagram DM Bot1 needs python 3.8 to run and the following modules.
+
 tested in spyder 5.0.5
 
 ## Modules
