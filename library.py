@@ -26,7 +26,7 @@ replies = {'say_hello': ['hey!!', 'hii!', 'hello', 'sup'],
            'answer': ""}
 
 
-github_link = '<https://github.com/rp-bot/ig-chat-assistant-1>'
+github_link = '<https://github.com/rp-bot/Instagram-DM-bot1>'
 logfile_users = f'logs/userlog_{date}.txt'
 logfile_chatnum = f'logs/chatlog_{date}.txt'
 logfile_texts = f'logs/textslog_{date}.txt'
