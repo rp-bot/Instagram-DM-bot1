@@ -3,6 +3,7 @@ import datetime
 now = datetime.datetime.today().strftime("%H:%M:%S")
 tdy = datetime.datetime.today().strftime("%d-%b-%y %H:%M")
 date = datetime.datetime.today().strftime("%d-%b-%y")
+
 greetings = ['how are you', 'how r you', 'how r u', 'hru',
              r"how\Ws life", "how you doing", 'how r u doing',
              r"how\Ws it going", r"what\Ws up\b"]
@@ -92,8 +93,3 @@ class PhraseLookup:
 
     def __str__(self):
         return self.eval_result
-
-
-if __name__ == '__main__':
-    x = PhraseLookup("good🔥🔥")
-    print(x.eval_result)

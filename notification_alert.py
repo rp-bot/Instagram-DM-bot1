@@ -5,7 +5,6 @@ import pyautogui as pt
 from pynput.mouse import Button, Controller
 from pynput.keyboard import Key, Controller as keyboard_con
 import library as lib
-import logging
 
 
 def linetag():
@@ -17,14 +16,12 @@ def linetag():
         print('hey from 0lines')
         newlogfile_users.write(f"--/{lib.tdy}")
     else:
-        # del firstline_eval_u
         newlogfile_users.write(f"\n\n--/{lib.tdy}")
 
     if len(firstline_eval_c) == 0:
         print('hey from 0lines')
         newlogfile_chatnum.write(f"--/{lib.tdy}")
     else:
-        # del firstline_eval_u
         newlogfile_chatnum.write(f"\n\n--/{lib.tdy}")
 
 
@@ -37,35 +34,6 @@ def logger(username="", chatnum="", u=False, c=False):
         fc.write(f"\n{lib.now} - ({chatnum}) new messages")
     fu.close()
     fc.close()
-
-
-def user_logger(name, log_file, level=logging.INFO):
-    global userlist, userindex
-    logger = logging.getLogger(name)
-    logger.handlers = []
-    formatter = logging.Formatter(
-        "%(asctime)s -- %(message)s",
-        datefmt='%H:%M:%S')
-    handler = logging.FileHandler(log_file)
-    handler.setFormatter(formatter)
-    logger.setLevel(level)
-    logger.addHandler(handler)
-
-    return logger
-
-
-def chat_logger(name, log_file, level=logging.INFO):
-    global userlist, userindex
-    logger = logging.getLogger(name)
-    logger.handlers = []
-    formatter = logging.Formatter(
-        "%(asctime)s -- %(message)s",
-        datefmt='%H:%M:%S')
-    handler = logging.FileHandler(log_file)
-    handler.setFormatter(formatter)
-    logger.setLevel(level)
-    logger.addHandler(handler)
-    return logger
 
 
 def copy():
@@ -89,10 +57,8 @@ def logusernames(numofchats):
         pt.tripleClick(interval=0.4)
         copy()
         searchusername = re.search(r".*(?= won't)", pyperclip.paste()).group()
-        # userlogger.info("@" + f"{searchusername}" + " sent a new msg")
         logger(username=searchusername, u=True)
         if num == 0:
-            # chatnumlogger.info(f"({numofchats})" + " new messages")
             logger(chatnum=numofchats, c=True)
         elif num > 0:
             pass
@@ -131,11 +97,3 @@ def checkstatus():
             break
         else:
             continue
-
-
-if __name__ == '__main__':
-    time.sleep(2)
-    linetag()
-    # userlogger = user_logger('user_logger', f'{lib.logfile_users}')
-    # chatnumlogger = chat_logger('chatnum_logger', f'{lib.logfile_chatnum}')
-    checkstatus()

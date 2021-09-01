@@ -17,7 +17,6 @@ def logger(user='', message='', bot=False, newuser=False):
             print('hey from 0lines')
             f.write(f"--/{lib.tdy}")
         else:
-            # del firstline_eval
             f.write(f"\n\n--/{lib.tdy}")
     elif bot is True:
         f.write(f"\n{lib.now} - //@{user} -- {message}")
@@ -49,7 +48,6 @@ def buffer():
 def copy(initial):
     dots_im = 'learningimages/3dots.png'
     pt.moveTo(initial, duration=.2)
-    # time.sleep(1)
     try:
         dots_loc = pt.locateOnScreen(dots_im, confidence=0.9)
         pt.moveTo(dots_loc[0:2], duration=.1)
@@ -64,7 +62,6 @@ def copy(initial):
         pt.leftClick(duration=0.1)
         pt.moveRel(120, -29, duration=0.2)
         pt.leftClick(duration=0.1)
-        # buffer()
         pass
     finally:
         pass
@@ -176,9 +173,5 @@ def bot_init():
             if index == len(userlist) - 1:
                 pt.moveTo(824, 158, duration=0.3)
                 pt.leftClick(duration=0.2)
-        print("breakin loop")  # contin
+        print("breakin loop")
         break
-
-
-if __name__ == '__main__':
-    time.sleep(2)
