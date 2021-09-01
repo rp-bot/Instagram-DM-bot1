@@ -13,7 +13,9 @@ A bot that can reply to basic one line texts.
 2. it also needs the elements of the page ```ctrl/cmd  + shft  + i```.
 3. it needs the ```<title>``` element(found under the ```<head>``` dropdown to check for new notifications.
 4. the mouse goes to the specific position of the element and updates every second. 
-5. when there is a new message, the same script logs the person/people that sent a new message and goes to 
+5. when there is a new message, the same script logs the person/people that sent a new message and goes to the respective chat and hands it over to **reply_py**.
+6. the reply script analyzes the latest text and replies based on what they said.
+
 
 ## Installation
 
