@@ -81,7 +81,9 @@ def evalndel(textback, clipboard):
     prev = ''
     try:
         prev = re.search(r'(?<=-- ).*', logslist[-2]).group()
-    except AttributeError or IndexError:
+    except AttributeError:
+        pass
+    except IndexError:
         pass
     if clipboard == '':
         languagecompute.marker = 1
