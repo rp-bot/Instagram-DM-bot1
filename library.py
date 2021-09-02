@@ -4,19 +4,19 @@ now = datetime.datetime.today().strftime("%H:%M:%S")
 tdy = datetime.datetime.today().strftime("%d-%b-%y %H:%M")
 date = datetime.datetime.today().strftime("%d-%b-%y")
 
-greetings = ['how are you', 'how r you', 'how r u', 'hru',
-             r"how\Ws life", "how you doing", 'how r u doing',
+greetings = [r'how are you', r'how r you', r'how r u', r'hru',
+             r"how\Ws life", r"how you doing", r'how r u doing',
              r"how\Ws it going", r"what\Ws up\b"]
 
-hellos = [r'\bhey\b', r'\bhi\b', r'\bhii\b', 'hello']
+hellos = [r'\bhey\b', r'\bhi\b', r'\bhii\b', r'hello']
 
-wishes = ['goodluck', 'all the best', 'best of luck',
-          'hope you have a good day', 'hope u have a good day',
-          'happy birthday', 'happy bday']
+wishes = [r'goodluck', r'all the best', r'best of luck',
+          r'hope you have a good day', r'hope u have a good day',
+          r'happy birthday', r'happy bday']
 
-basic_answers = ['good', r"i\Wm good", "great", 'not good',
-                 'not so good',
-                 'not bad', r"i\Wm fine", r"i\Wm alright"]
+basic_answers = [r'good', r"i\Wm good", r"great", r'not good',
+                 r'not so good',
+                 r'not bad', r"i\Wm fine", r"i\Wm alright"]
 
 kill_text_ = r"\bstop\b"
 
@@ -45,7 +45,7 @@ class PhraseLookup:
         self.greetings()
         self.hellos()
         self.wishes()
-        self.basic_answers()
+        # self.basic_answers()
         self.kill_text()
         if self.eval_result == '':
             self.eval_result = 'inconclusive'
