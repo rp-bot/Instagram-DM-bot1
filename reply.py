@@ -109,7 +109,7 @@ def languagecompute(index):
             logger(userlist[index], clipboard)
             reply(textback)
         elif textback == 'inconclusive' and languagecompute.marker == 0:
-            reply(inconclusive=True)
+            reply(userlist[index], inconclusive=True)
             break
         elif languagecompute.marker == 1:
             logger(userlist[index], '//end conversation')
@@ -144,7 +144,7 @@ def reply(text='-', inconclusive=False):
         pyperclip.copy("at this time, I can only compute one line at a time" +
                        " and can only handle a few basic strings" +
                        "\n\nType [stop] to make me shut up")
-        logger("bot", " cover blown", bot=True)
+        logger("bot", " cover blown by @" + f"{text}", bot=True)
         pt.moveTo(657, 1397, duration=.2)
         pt.leftClick(duration=0.1)
         paste()
